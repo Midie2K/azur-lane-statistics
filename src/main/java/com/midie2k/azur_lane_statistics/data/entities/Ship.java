@@ -1,8 +1,9 @@
 package com.midie2k.azur_lane_statistics.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.midie2k.azur_lane_statistics.data.enumerate.Armor;
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
+import org.springframework.data.web.JsonPath;
 
 import java.util.Objects;
 
@@ -21,24 +22,21 @@ public class Ship {
     @JoinColumn(name = "fraction_id")
     private Fraction fraction;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fraction_id", insertable = false, updatable = false)
+    @Column(name = "fraction_id", insertable = false, updatable = false)
     private Long fractionId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "classification_id")
     private Classification classification;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "classification_id", insertable = false, updatable = false)
+    @Column(name = "classification_id", insertable = false, updatable = false)
     private Long classificationId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ship_class_id")
     private ShipClass shipClass;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ship_class_id", insertable = false, updatable = false)
+    @Column(name = "ship_class_id", insertable = false, updatable = false)
     private Long shipClassId;
 
     @Column(name = "armored")
@@ -47,24 +45,6 @@ public class Ship {
 
     @Column(name = "build_time")
     private String buildTime;
-
-    public Ship() {
-    }
-
-    public Ship(Long id, String name, Fraction fraction, Long fractionId,
-                Classification classification, Long classificationId,
-                ShipClass shipClass, Long shipClassId, Armor armor, String buildTime) {
-        this.id = id;
-        this.name = name;
-        this.fraction = fraction;
-        this.fractionId = fractionId;
-        this.classification = classification;
-        this.classificationId = classificationId;
-        this.shipClass = shipClass;
-        this.shipClassId = shipClassId;
-        this.armor = armor;
-        this.buildTime = buildTime;
-    }
 
     public Long getId() {
         return id;
