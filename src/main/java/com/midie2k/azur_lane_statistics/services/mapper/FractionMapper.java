@@ -9,9 +9,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface FractionMapper {
 
-    FractionDTO toDTO(Fraction entity);
+    FractionDTO toDTO(Fraction fraction);
 
-    List<FractionDTO> toDTO(List<Fraction> entities);
+    List<FractionDTO> toDTO(List<Fraction> fractionList);
 
     Fraction toEntity(FractionDTO dto);
 
