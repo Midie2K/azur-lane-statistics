@@ -5,6 +5,7 @@ import com.midie2k.azur_lane_statistics.services.ShipClassQueryService;
 import com.midie2k.azur_lane_statistics.services.ShipClassService;
 import com.midie2k.azur_lane_statistics.services.dto.ShipClassDTO;
 import com.midie2k.azur_lane_statistics.services.errors.ObjectException;
+import com.midie2k.azur_lane_statistics.services.filtration.entities.ShipClassCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -48,9 +49,9 @@ public class ShipClassResource {
     }
 
     @GetMapping("/ship-class")
-    public ResponseEntity<List<ShipClassDTO>> getAll(){
+    public ResponseEntity<List<ShipClassDTO>> getAll(ShipClassCriteria criteria){
         log.debug("Request to get all ship classes");
-        List<ShipClassDTO> shipClassDTOS = shipClassQueryService.getAll();
+        List<ShipClassDTO> shipClassDTOS = shipClassQueryService.getAll(criteria);
         return ResponseEntity.ok(shipClassDTOS);
     }
 
