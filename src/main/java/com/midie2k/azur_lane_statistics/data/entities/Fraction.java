@@ -13,7 +13,7 @@ public class Fraction {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "index")
+    @Column(name = "fraction_index")
     private String index;
 
     @Column(name = "name")

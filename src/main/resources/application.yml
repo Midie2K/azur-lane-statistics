@@ -22,3 +22,10 @@ spring:
       min-response-size: 1024
     max-http-header-size: 5MB
     tomcat.max-threads: 418
+
+  logging:
+    level:
+      root: DEBUG
+      org.springframework: DEBUG
+    pattern:
+      console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"

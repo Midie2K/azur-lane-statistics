@@ -18,7 +18,6 @@ public interface ShipMapper {
     @Mapping(source = "classification.index", target = "classificationIndex")
     @Mapping(source = "shipClass.id", target = "shipClassId")
     @Mapping(source = "shipClass.name", target = "shipClassName")
-    @Mapping(source = "shipClass.index", target = "shipClassIndex")
     ShipDTO toDTO(Ship ship);
 
     List<ShipDTO> toDTO(List<Ship> ships);

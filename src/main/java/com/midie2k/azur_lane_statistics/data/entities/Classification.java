@@ -13,7 +13,7 @@ public class Classification {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "index")
+    @Column(name = "classification_index")
     private String index;
 
     @Column(name = "name")

@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class ShipClassServiceImpl implements ShipClassService {
@@ -27,14 +26,17 @@ public class ShipClassServiceImpl implements ShipClassService {
 
     @Override
     public ShipClassDTO save(ShipClassDTO dto) {
-        log.debug("Request to save : {}", dto);
+        log.debug("Request to save ship class: {}", dto);
+        if(dto.getName() == null || dto.getName().isBlank()){
+            throw new ObjectException("Missing ship class name", ErrorList.NAME_MISSING);
+        }
         ShipClass shipClass = shipClassRepository.save(shipClassMapper.toEntity(dto));
         return shipClassMapper.toDTO(shipClass);
     }
 
     @Override
     public void delete(Long id) {
-        log.debug("Request to delete by id : {}", id);
+        log.debug("Request to delete ship class by id : {}", id);
         ShipClass shipClass = shipClassRepository.getReferenceById(id);
         if(shipClass.getId() == null){
             throw new ObjectException("ShipClass not found with id : " + id, ErrorList.CLASS_NOT_FOUND);
