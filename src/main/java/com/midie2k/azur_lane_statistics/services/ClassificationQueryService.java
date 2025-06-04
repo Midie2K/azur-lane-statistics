@@ -8,10 +8,13 @@ import com.midie2k.azur_lane_statistics.services.filtration.entities.Classificat
 import com.midie2k.azur_lane_statistics.services.mapper.ClassificationMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -34,9 +37,21 @@ public class ClassificationQueryService extends QueryService<Classification> {
     }
 
     @Transactional(readOnly = true, isolation = Isolation.READ_UNCOMMITTED)
+    public Page<ClassificationDTO> getAllPage(ClassificationCriteria criteria, Pageable page){
+        log.debug("Request to get all ship paged classification list");
+        Specification<Classification> specification = createSpecification(criteria);
+        return classificationRepository.findAll(specification, page).map(classificationMapper::toDTO);
+    }
+
+    @Transactional(readOnly = true, isolation = Isolation.READ_UNCOMMITTED)
     public ClassificationDTO getById(Long id){
         log.debug("Request to get ship classification by id : {}", id);
         return classificationMapper.toDTO(classificationRepository.getById(id));
+    }
+
+    @Transactional(readOnly = true, isolation = Isolation.READ_UNCOMMITTED)
+    public Long count(){
+        return classificationRepository.count();
     }
 
     private Specification<Classification> createSpecification(ClassificationCriteria criteria) {
