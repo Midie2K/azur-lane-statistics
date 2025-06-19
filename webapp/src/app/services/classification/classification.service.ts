@@ -20,11 +20,26 @@ export class ClassificationService {
 
   constructor(private http: HttpClient) {}
 
-  getClassifications(params: { page: number; size: number; sort: string }): Observable<PageResponse<IClassification>> {
+  getClassifications(params: {
+    page: number;
+    size: number;
+    sort: string;
+    index?: string | null;
+    name?: string | null;
+  }): Observable<PageResponse<IClassification>> {
     let httpParams = new HttpParams()
       .set('page', params.page.toString())
       .set('size', params.size.toString())
       .set('sort', params.sort);
+
+    // Dodajemy filtry tylko jeśli są obecne i niepuste
+    if (params.index) {
+      httpParams = httpParams.set('index.startsWith', params.index);
+    }
+
+    if (params.name) {
+      httpParams = httpParams.set('name.startsWith', params.name);
+    }
 
     return this.http.get<PageResponse<IClassification>>(this.apiUrl, { params: httpParams });
   }
