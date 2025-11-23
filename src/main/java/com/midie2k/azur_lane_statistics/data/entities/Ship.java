@@ -43,6 +43,13 @@ public class Ship {
     @Enumerated(value = EnumType.STRING)
     private Armor armor;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id")
+    private Event event;
+
+    @Column(name = "event_id", insertable = false, updatable = false)
+    private Long event_id;
+
     @Column(name = "build_time")
     private String buildTime;
 
@@ -126,16 +133,32 @@ public class Ship {
         this.buildTime = buildTime;
     }
 
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Long getEvent_id() {
+        return event_id;
+    }
+
+    public void setEvent_id(Long event_id) {
+        this.event_id = event_id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Ship ship = (Ship) o;
-        return Objects.equals(id, ship.id) && Objects.equals(name, ship.name) && Objects.equals(fraction, ship.fraction) && Objects.equals(fractionId, ship.fractionId) && Objects.equals(classification, ship.classification) && Objects.equals(classificationId, ship.classificationId) && Objects.equals(shipClass, ship.shipClass) && Objects.equals(shipClassId, ship.shipClassId) && armor == ship.armor && Objects.equals(buildTime, ship.buildTime);
+        return Objects.equals(id, ship.id) && Objects.equals(name, ship.name) && Objects.equals(fraction, ship.fraction) && Objects.equals(fractionId, ship.fractionId) && Objects.equals(classification, ship.classification) && Objects.equals(classificationId, ship.classificationId) && Objects.equals(shipClass, ship.shipClass) && Objects.equals(shipClassId, ship.shipClassId) && armor == ship.armor && Objects.equals(event, ship.event) && Objects.equals(event_id, ship.event_id) && Objects.equals(buildTime, ship.buildTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, fraction, fractionId, classification, classificationId, shipClass, shipClassId, armor, buildTime);
+        return Objects.hash(id, name, fraction, fractionId, classification, classificationId, shipClass, shipClassId, armor, event, event_id, buildTime);
     }
 
     @Override
@@ -150,6 +173,8 @@ public class Ship {
                 ", shipClass=" + shipClass +
                 ", shipClassId=" + shipClassId +
                 ", armor=" + armor +
+                ", event=" + event +
+                ", event_id=" + event_id +
                 ", buildTime='" + buildTime + '\'' +
                 '}';
     }

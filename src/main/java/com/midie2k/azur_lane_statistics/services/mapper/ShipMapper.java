@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {FractionMapper.class, ClassificationMapper.class, ShipClassMapper.class})
+@Mapper(componentModel = "spring", uses = {FractionMapper.class, ClassificationMapper.class, ShipClassMapper.class, EventMapper.class})
 public interface ShipMapper {
 
     @Mapping(source = "fraction.id", target = "fractionId")
@@ -18,6 +18,8 @@ public interface ShipMapper {
     @Mapping(source = "classification.index", target = "classificationIndex")
     @Mapping(source = "shipClass.id", target = "shipClassId")
     @Mapping(source = "shipClass.name", target = "shipClassName")
+    @Mapping(source = "event.id", target = "eventId")
+    @Mapping(source = "event.name", target = "eventName")
     ShipDTO toDTO(Ship ship);
 
     List<ShipDTO> toDTO(List<Ship> ships);
@@ -25,6 +27,7 @@ public interface ShipMapper {
     @Mapping(source = "fractionId", target = "fraction.id")
     @Mapping(source = "classificationId", target = "classification.id")
     @Mapping(source = "shipClassId", target = "shipClass.id")
+    @Mapping(source = "eventId", target = "event.id")
     Ship toEntity(ShipDTO dto);
 
     List<Ship> toEntity(List<ShipDTO> dtoList);

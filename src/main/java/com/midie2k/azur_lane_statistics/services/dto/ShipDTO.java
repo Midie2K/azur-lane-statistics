@@ -26,12 +26,15 @@ public class ShipDTO {
 
     private Armor armor;
 
+    private Long eventId;
+    private String eventName;
+
     private String buildTime;
 
     public ShipDTO() {
     }
 
-    public ShipDTO(Long id, String name, Long fractionId, String fractionIndex, String fractionName, Long classificationId, String classificationIndex, String classificationName, Long shipClassId, String shipClassIndex, String shipClassName, Armor armor, String buildTime) {
+    public ShipDTO(Long id, String name, Long fractionId, String fractionIndex, String fractionName, Long classificationId, String classificationIndex, String classificationName, Long shipClassId, String shipClassIndex, String shipClassName, Armor armor, Long eventId, String eventName, String buildTime) {
         this.id = id;
         this.name = name;
         this.fractionId = fractionId;
@@ -44,6 +47,8 @@ public class ShipDTO {
         this.shipClassIndex = shipClassIndex;
         this.shipClassName = shipClassName;
         this.armor = armor;
+        this.eventId = eventId;
+        this.eventName = eventName;
         this.buildTime = buildTime;
     }
 
@@ -151,16 +156,32 @@ public class ShipDTO {
         this.buildTime = buildTime;
     }
 
+    public Long getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         ShipDTO shipDTO = (ShipDTO) o;
-        return Objects.equals(id, shipDTO.id) && Objects.equals(name, shipDTO.name) && Objects.equals(fractionId, shipDTO.fractionId) && Objects.equals(fractionIndex, shipDTO.fractionIndex) && Objects.equals(fractionName, shipDTO.fractionName) && Objects.equals(classificationId, shipDTO.classificationId) && Objects.equals(classificationIndex, shipDTO.classificationIndex) && Objects.equals(classificationName, shipDTO.classificationName) && Objects.equals(shipClassId, shipDTO.shipClassId) && Objects.equals(shipClassIndex, shipDTO.shipClassIndex) && Objects.equals(shipClassName, shipDTO.shipClassName) && armor == shipDTO.armor && Objects.equals(buildTime, shipDTO.buildTime);
+        return Objects.equals(id, shipDTO.id) && Objects.equals(name, shipDTO.name) && Objects.equals(fractionId, shipDTO.fractionId) && Objects.equals(fractionIndex, shipDTO.fractionIndex) && Objects.equals(fractionName, shipDTO.fractionName) && Objects.equals(classificationId, shipDTO.classificationId) && Objects.equals(classificationIndex, shipDTO.classificationIndex) && Objects.equals(classificationName, shipDTO.classificationName) && Objects.equals(shipClassId, shipDTO.shipClassId) && Objects.equals(shipClassIndex, shipDTO.shipClassIndex) && Objects.equals(shipClassName, shipDTO.shipClassName) && armor == shipDTO.armor && Objects.equals(eventId, shipDTO.eventId) && Objects.equals(eventName, shipDTO.eventName) && Objects.equals(buildTime, shipDTO.buildTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, fractionId, fractionIndex, fractionName, classificationId, classificationIndex, classificationName, shipClassId, shipClassIndex, shipClassName, armor, buildTime);
+        return Objects.hash(id, name, fractionId, fractionIndex, fractionName, classificationId, classificationIndex, classificationName, shipClassId, shipClassIndex, shipClassName, armor, eventId, eventName, buildTime);
     }
 
     @Override
@@ -178,6 +199,8 @@ public class ShipDTO {
                 ", shipClassIndex='" + shipClassIndex + '\'' +
                 ", shipClassName='" + shipClassName + '\'' +
                 ", armor=" + armor +
+                ", eventId=" + eventId +
+                ", eventName='" + eventName + '\'' +
                 ", buildTime='" + buildTime + '\'' +
                 '}';
     }
