@@ -1,6 +1,7 @@
 package com.midie2k.azur_lane_statistics.services.filtration.filters;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class StringFilter extends Filter<String> {
     private String contains;
@@ -82,5 +83,31 @@ public class StringFilter extends Filter<String> {
         copy.setNotEndsWith(notEndsWith);
         copy.setSpecified(specified);
         return copy;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        StringFilter that = (StringFilter) o;
+        return Objects.equals(contains, that.contains) && Objects.equals(notContains, that.notContains) && Objects.equals(startsWith, that.startsWith) && Objects.equals(notStartsWith, that.notStartsWith) && Objects.equals(endsWith, that.endsWith) && Objects.equals(notEndsWith, that.notEndsWith) && Objects.equals(specified, that.specified);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), contains, notContains, startsWith, notStartsWith, endsWith, notEndsWith, specified);
+    }
+
+    @Override
+    public String toString() {
+        return "StringFilter{" +
+                "contains='" + contains + '\'' +
+                ", notContains='" + notContains + '\'' +
+                ", startsWith='" + startsWith + '\'' +
+                ", notStartsWith='" + notStartsWith + '\'' +
+                ", endsWith='" + endsWith + '\'' +
+                ", notEndsWith='" + notEndsWith + '\'' +
+                ", specified=" + specified +
+                '}';
     }
 }

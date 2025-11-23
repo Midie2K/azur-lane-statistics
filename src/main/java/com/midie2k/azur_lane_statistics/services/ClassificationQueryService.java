@@ -9,6 +9,7 @@ import com.midie2k.azur_lane_statistics.services.mapper.ClassificationMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -38,9 +39,10 @@ public class ClassificationQueryService extends QueryService<Classification> {
 
     @Transactional(readOnly = true, isolation = Isolation.READ_UNCOMMITTED)
     public Page<ClassificationDTO> getAllPage(ClassificationCriteria criteria, Pageable page){
-        log.debug("Request to get all ship paged classification list");
+        log.debug("Request to get all ship paged classification list with criteria: {}", criteria);
         Specification<Classification> specification = createSpecification(criteria);
-        return classificationRepository.findAll(specification, page).map(classificationMapper::toDTO);
+        List<ClassificationDTO> result = classificationMapper.toDTO(classificationRepository.findAll(specification, page).getContent());
+        return new PageImpl<ClassificationDTO>(result, page, result.size());
     }
 
     @Transactional(readOnly = true, isolation = Isolation.READ_UNCOMMITTED)

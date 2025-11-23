@@ -1,6 +1,7 @@
 package com.midie2k.azur_lane_statistics.services.filtration.filters;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class RangeFilter<T extends Comparable<? super T>> extends Filter<T> {
     private T greaterThan;
@@ -52,5 +53,28 @@ public class RangeFilter<T extends Comparable<? super T>> extends Filter<T> {
         copy.setGreaterThanOrEqual(greaterThanOrEqual);
         copy.setLessThanOrEqual(lessThanOrEqual);
         return copy;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        RangeFilter<?> that = (RangeFilter<?>) o;
+        return Objects.equals(greaterThan, that.greaterThan) && Objects.equals(lessThan, that.lessThan) && Objects.equals(greaterThanOrEqual, that.greaterThanOrEqual) && Objects.equals(lessThanOrEqual, that.lessThanOrEqual);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), greaterThan, lessThan, greaterThanOrEqual, lessThanOrEqual);
+    }
+
+    @Override
+    public String toString() {
+        return "RangeFilter{" +
+                "greaterThan=" + greaterThan +
+                ", lessThan=" + lessThan +
+                ", greaterThanOrEqual=" + greaterThanOrEqual +
+                ", lessThanOrEqual=" + lessThanOrEqual +
+                '}';
     }
 }

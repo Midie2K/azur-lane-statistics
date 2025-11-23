@@ -2,6 +2,7 @@ package com.midie2k.azur_lane_statistics.services.filtration.filters;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Filter<T> {
     private T equals;
@@ -50,4 +51,25 @@ public class Filter<T> {
         return copy;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Filter<?> filter = (Filter<?>) o;
+        return Objects.equals(equals, filter.equals) && Objects.equals(notEquals, filter.notEquals) && Objects.equals(in, filter.in) && Objects.equals(notIn, filter.notIn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(equals, notEquals, in, notIn);
+    }
+
+    @Override
+    public String toString() {
+        return "Filter{" +
+                "equals=" + equals +
+                ", notEquals=" + notEquals +
+                ", in=" + in +
+                ", notIn=" + notIn +
+                '}';
+    }
 }

@@ -4,6 +4,7 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWD}
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   application:
     name: azur-lane-statistics
 
@@ -23,9 +24,8 @@ spring:
     max-http-header-size: 5MB
     tomcat.max-threads: 418
 
-  logging:
-    level:
-      root: DEBUG
-      org.springframework: DEBUG
-    pattern:
-      console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+logging:
+  level:
+    com.midie2k.azur_lane_statistics: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"

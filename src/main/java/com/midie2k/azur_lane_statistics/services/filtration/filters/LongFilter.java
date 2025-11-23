@@ -1,6 +1,7 @@
 package com.midie2k.azur_lane_statistics.services.filtration.filters;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LongFilter extends RangeFilter<Long>{
     private Long greaterThan;
@@ -60,5 +61,28 @@ public class LongFilter extends RangeFilter<Long>{
         copy.setGreaterThanOrEqual(this.greaterThanOrEqual);
         copy.setLessThanOrEqual(this.lessThanOrEqual);
         return copy;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        LongFilter that = (LongFilter) o;
+        return Objects.equals(greaterThan, that.greaterThan) && Objects.equals(lessThan, that.lessThan) && Objects.equals(greaterThanOrEqual, that.greaterThanOrEqual) && Objects.equals(lessThanOrEqual, that.lessThanOrEqual);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), greaterThan, lessThan, greaterThanOrEqual, lessThanOrEqual);
+    }
+
+    @Override
+    public String toString() {
+        return "LongFilter{" +
+                "greaterThan=" + greaterThan +
+                ", lessThan=" + lessThan +
+                ", greaterThanOrEqual=" + greaterThanOrEqual +
+                ", lessThanOrEqual=" + lessThanOrEqual +
+                '}';
     }
 }

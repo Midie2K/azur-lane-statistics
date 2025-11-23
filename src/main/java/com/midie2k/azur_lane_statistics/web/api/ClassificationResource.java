@@ -50,7 +50,7 @@ public class ClassificationResource {
 
     @GetMapping("/classification")
     public ResponseEntity<Page<ClassificationDTO>> getAll(ClassificationCriteria criteria, Pageable page){
-        log.debug("Request to get all classifications");
+        log.debug("Request to get all classifications by criteria: {}", criteria);
         Page<ClassificationDTO> classificationDTOS = classificationQueryService.getAllPage(criteria, page);
         return ResponseEntity.ok(classificationDTOS);
     }

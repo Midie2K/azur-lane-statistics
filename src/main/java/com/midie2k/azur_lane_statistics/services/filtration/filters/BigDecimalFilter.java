@@ -2,8 +2,9 @@ package com.midie2k.azur_lane_statistics.services.filtration.filters;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class BigDecimalFilter extends RangeFilter<BigDecimal>{
+public class BigDecimalFilter extends RangeFilter<BigDecimal> {
     private BigDecimal greaterThan;
     private BigDecimal lessThan;
     private BigDecimal greaterThanOrEqual;
@@ -61,5 +62,28 @@ public class BigDecimalFilter extends RangeFilter<BigDecimal>{
         copy.setGreaterThanOrEqual(this.greaterThanOrEqual);
         copy.setLessThanOrEqual(this.lessThanOrEqual);
         return copy;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        BigDecimalFilter that = (BigDecimalFilter) o;
+        return Objects.equals(greaterThan, that.greaterThan) && Objects.equals(lessThan, that.lessThan) && Objects.equals(greaterThanOrEqual, that.greaterThanOrEqual) && Objects.equals(lessThanOrEqual, that.lessThanOrEqual);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), greaterThan, lessThan, greaterThanOrEqual, lessThanOrEqual);
+    }
+
+    @Override
+    public String toString() {
+        return "BigDecimalFilter{" +
+                "greaterThan=" + greaterThan +
+                ", lessThan=" + lessThan +
+                ", greaterThanOrEqual=" + greaterThanOrEqual +
+                ", lessThanOrEqual=" + lessThanOrEqual +
+                '}';
     }
 }
