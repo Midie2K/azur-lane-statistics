@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClassificationService } from './classification.service';
 import { IClassification } from '../../entities/classification.model';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-classification',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './classification.component.html'
 })
 export class ClassificationComponent implements OnInit {

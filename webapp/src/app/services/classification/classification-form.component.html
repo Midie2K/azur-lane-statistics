@@ -1,45 +1,27 @@
 <div class="container mt-4">
-  <div class="card">
-    <div class="card-body">
-      <h1 class="card-title mb-4" *ngIf="!classification?.id">Add Classification</h1>
-      <h1 class="card-title mb-4" *ngIf="classification?.id">Edit Classification</h1>
+  <h2 class="text-center mb-4">
+    {{ classification ? 'Edit Classification' : 'Add Classification' }}
+  </h2>
 
-      <form [formGroup]="form" (ngSubmit)="submit()">
-        <!-- ID readonly -->
-        <div class="mb-3">
-          <label for="id" class="form-label">ID</label>
-          <input
-            type="text"
-            id="id"
-            class="form-control"
-            [value]="classification?.id || ''"
-            readonly
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="index" class="form-label">Index</label>
-          <input
-            type="text"
-            id="index"
-            class="form-control"
-            formControlName="index"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input
-            type="text"
-            id="name"
-            class="form-control"
-            formControlName="name"
-          />
-        </div>
-
-        <button type="submit" class="btn btn-primary me-2">Submit</button>
-        <a href="http://localhost:9000/classification" class="btn btn-secondary">Back</a>
-      </form>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="mb-3">
+      <label for="index" class="form-label">Index</label>
+      <input id="index" class="form-control" formControlName="index" />
     </div>
-  </div>
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input id="name" class="form-control" formControlName="name" />
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-primary">
+        {{ classification ? 'Update' : 'Add' }}
+      </button>
+
+      <button type="button" class="btn btn-secondary" [routerLink]="['/classification']">
+        Back
+      </button>
+    </div>
+  </form>
 </div>
