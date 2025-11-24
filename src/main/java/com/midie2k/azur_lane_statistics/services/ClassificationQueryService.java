@@ -41,8 +41,7 @@ public class ClassificationQueryService extends QueryService<Classification> {
     public Page<ClassificationDTO> getAllPage(ClassificationCriteria criteria, Pageable page){
         log.debug("Request to get all ship paged classification list with criteria: {}", criteria);
         Specification<Classification> specification = createSpecification(criteria);
-        List<ClassificationDTO> result = classificationMapper.toDTO(classificationRepository.findAll(specification, page).getContent());
-        return new PageImpl<ClassificationDTO>(result, page, result.size());
+        return classificationRepository.findAll(specification, page).map(classificationMapper::toDTO);
     }
 
     @Transactional(readOnly = true, isolation = Isolation.READ_UNCOMMITTED)
