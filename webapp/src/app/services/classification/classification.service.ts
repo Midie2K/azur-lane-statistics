@@ -43,4 +43,8 @@ export class ClassificationService {
 
     return this.http.get<PageResponse<IClassification>>(this.apiUrl, { params: httpParams });
   }
+
+  deleteClassification(id: number) {
+  return this.http.delete(`${this.apiUrl}/${id}`);
+}
 }

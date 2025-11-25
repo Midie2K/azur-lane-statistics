@@ -43,6 +43,7 @@
             Name
             <i class="bi" [ngClass]="sortField === 'name' ? (sortDirection === 'asc' ? 'bi-arrow-up' : 'bi-arrow-down') : 'bi-arrow-down-up'"></i>
           </th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -50,6 +51,11 @@
           <td>{{ c.id }}</td>
           <td>{{ c.index }}</td>
           <td>{{ c.name }}</td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="onDelete(c.id!)">
+              Delete
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>

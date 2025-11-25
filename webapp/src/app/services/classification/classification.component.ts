@@ -93,4 +93,20 @@ loadClassifications(): void {
     this.currentPage = 0;
     this.loadClassifications();
   }
+
+  onDelete(id: number) {
+  if (!confirm("Are you sure you want to delete this item?")) {
+    return;
+  }
+
+  this.classificationService.deleteClassification(id).subscribe({
+    next: () => {
+      this.loadClassifications();
+    },
+    error: err => {
+      console.error("Delete error:", err);
+      alert("Failed to delete item.");
+    }
+  });
+}
 }
