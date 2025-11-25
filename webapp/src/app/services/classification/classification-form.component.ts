@@ -25,6 +25,7 @@ export class ClassificationFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
+      id : null,
       index: [''],
       name: [''],
     });
@@ -34,6 +35,7 @@ export class ClassificationFormComponent implements OnInit {
       this.http.get<IClassification>(`${this.apiUrl}/${id}`).subscribe(data => {
         this.classification = data;
         this.form.patchValue({
+          id: data.id || null,
           index: data.index || '',
           name: data.name || ''
         });
@@ -45,13 +47,11 @@ export class ClassificationFormComponent implements OnInit {
     const data: IClassification = this.form.getRawValue();
 
     if (this.classification?.id) {
-      this.http.put<IClassification>(`${this.apiUrl}/${this.classification.id}`, data).subscribe(res => {
-        alert('Classification updated!');
+      this.http.put<IClassification>(this.apiUrl, data).subscribe(res => {
         this.router.navigate(['/classification']);
       });
     } else {
       this.http.post<IClassification>(this.apiUrl, data).subscribe(res => {
-        alert('Classification added!');
         this.router.navigate(['/classification']);
       });
     }

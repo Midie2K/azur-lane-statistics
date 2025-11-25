@@ -3,7 +3,7 @@ import { ClassificationComponent } from './services/classification/classificatio
 import { ClassificationFormComponent } from './services/classification/classification-form.component';
 
 export const routes: Routes = [
-     { path: '', redirectTo: 'classification', pathMatch: 'full' },
+     { path: '', redirectTo: 'app', pathMatch: 'full' },
   { path: 'classification', component: ClassificationComponent },
   { path: 'classification-form', component: ClassificationFormComponent },
 ];

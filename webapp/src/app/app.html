@@ -3,11 +3,20 @@
   <div class="container">
     <span class="logo">Azur Lane Statistics</span>
     <ul class="nav-links">
-      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-      <li><a routerLink="/classification" routerLinkActive="active">Classification</a></li>
-      <li><a routerLink="/ships" routerLinkActive="active">Ships</a></li>
-      <li><a routerLink="/about" routerLinkActive="active">About</a></li>
-    </ul>
+  <li>
+    <a [routerLink]="['']" routerLinkActive="active">Home</a>
+  </li>
+
+  <li>
+    <a [routerLink]="['/classification']" routerLinkActive="active">
+      Classification
+    </a>
+  </li>
+
+  <li>
+    <a [routerLink]="['/ship-class']" routerLinkActive="active">ShipsClasses</a>
+  </li>
+</ul>
   </div>
 </nav>
 

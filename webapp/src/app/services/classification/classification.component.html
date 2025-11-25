@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h2 class="text-center mb-4">Klasyfikacje</h2>
+  <h2 class="text-center mb-4">Classification</h2>
 
   <div class="row mb-3">
       <div class="col-md-4">
@@ -52,6 +52,9 @@
           <td>{{ c.index }}</td>
           <td>{{ c.name }}</td>
           <td>
+            <button class="btn btn-warning btn-sm me-2" [routerLink]="['/classification-form']" [queryParams]="{ id: c.id }">
+              Edit
+            </button>
             <button class="btn btn-danger btn-sm" (click)="onDelete(c.id!)">
               Delete
             </button>

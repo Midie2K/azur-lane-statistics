@@ -4,6 +4,11 @@
   </h2>
 
   <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="mb-3">
+      <label for="id" class="form-label">Id</label>
+      <input id="id" class="form-control" formControlName="id" readonly />
+    </div>
+
     <div class="mb-3">
       <label for="index" class="form-label">Index</label>
       <input id="index" class="form-control" formControlName="index" />
