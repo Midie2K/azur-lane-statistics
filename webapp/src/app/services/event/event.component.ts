@@ -1,18 +1,18 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ClassificationService } from './classification.service';
-import { IClassification } from '../../entities/classification.model';
 import { RouterModule } from '@angular/router';
+import { IEvent } from '../../entities/event.model';
+import { EventService } from './event.service';
 
 @Component({
-  selector: 'app-classification',
+  selector: 'app-event',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './classification.component.html'
+  templateUrl: './event.component.html'
 })
-export class ClassificationComponent implements OnInit {
-  classifications: IClassification[] = [];
+export class EventComponent implements OnInit {
+  events: IEvent[] = [];
   currentPage = 0;
   pageSize = 10;
   totalPages = 0;
@@ -24,33 +24,31 @@ export class ClassificationComponent implements OnInit {
   sortDirection: 'asc' | 'desc' = 'asc';
 
   filters = {
-    index: '',
     name: ''
   };
 
   constructor(
-    private classificationService: ClassificationService,
+    private eventService: EventService,
     private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.loadClassifications();
+    this.loadevent();
   }
 
-loadClassifications(): void {
+loadevent(): void {
   this.loading = true;
 
   const params = {
     page: this.currentPage,
     size: this.pageSize,
     sort: `${this.sortField},${this.sortDirection}`,
-    index: this.filters.index || null,
     name: this.filters.name || null
   };
 
-  this.classificationService.getClassifications(params).subscribe({
+  this.eventService.getevent(params).subscribe({
     next: (res) => {
-      this.classifications = res.content;
+      this.events = res.content;
       this.totalPages = res.totalPages;
       this.hasNextPage = !res.last;
       
@@ -69,13 +67,13 @@ loadClassifications(): void {
     const value = +(event.target as HTMLSelectElement).value;
     this.pageSize = value;
     this.currentPage = 0;
-    this.loadClassifications();
+    this.loadevent();
   }
 
   changePage(page: number): void {
     if (page >= 0 && page < this.totalPages) {
       this.currentPage = page;
-      this.loadClassifications();
+      this.loadevent();
     }
   }
 
@@ -86,12 +84,12 @@ loadClassifications(): void {
       this.sortField = field;
       this.sortDirection = 'asc';
     }
-    this.loadClassifications();
+    this.loadevent();
   }
 
   applyFilters(): void {
     this.currentPage = 0;
-    this.loadClassifications();
+    this.loadevent();
   }
 
   onDelete(id: number) {
@@ -99,9 +97,9 @@ loadClassifications(): void {
     return;
   }
 
-    this.classificationService.deleteClassification(id).subscribe({
+    this.eventService.deleteEvent(id).subscribe({
       next: () => {
-        this.loadClassifications();
+        this.loadevent();
       },
       error: err => {
         console.error("Delete error:", err);

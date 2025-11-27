@@ -8,6 +8,8 @@ import com.midie2k.azur_lane_statistics.services.errors.ObjectException;
 import com.midie2k.azur_lane_statistics.services.filtration.entities.ShipClassCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,10 +50,17 @@ public class ShipClassResource {
         return ResponseEntity.ok(updated);
     }
 
-    @GetMapping("/ship-class")
+    @GetMapping("/ship-class/all")
     public ResponseEntity<List<ShipClassDTO>> getAll(ShipClassCriteria criteria){
         log.debug("Request to get all ship classes");
         List<ShipClassDTO> shipClassDTOS = shipClassQueryService.getAll(criteria);
+        return ResponseEntity.ok(shipClassDTOS);
+    }
+
+    @GetMapping("/ship-class")
+    public ResponseEntity<Page<ShipClassDTO>> getAllPage(ShipClassCriteria criteria, Pageable pageable){
+        log.debug("Request to get all ship classes");
+        Page<ShipClassDTO> shipClassDTOS = shipClassQueryService.getAllPage(criteria, pageable);
         return ResponseEntity.ok(shipClassDTOS);
     }
 

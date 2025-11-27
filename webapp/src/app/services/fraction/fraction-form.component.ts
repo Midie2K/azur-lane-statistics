@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { IClassification } from '../../entities/classification.model';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { IFraction } from '../../entities/fraction.model';
 
 @Component({
-  selector: 'classification-form',
+  selector: 'fraction-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
-  templateUrl: './classification-form.component.html',
+  templateUrl: './fraction-form.component.html',
 })
-export class ClassificationFormComponent implements OnInit {
+export class FractionFormComponent implements OnInit {
   form!: FormGroup;
-  classification?: IClassification;
-  private apiUrl = 'http://localhost:8080/api/classification';
+  fraction?: IFraction;
+  private apiUrl = 'http://localhost:8080/api/fraction';
 
   constructor(
     private fb: FormBuilder,
@@ -32,8 +32,8 @@ export class ClassificationFormComponent implements OnInit {
 
     const id = this.route.snapshot.queryParamMap.get('id');
     if (id) {
-      this.http.get<IClassification>(`${this.apiUrl}/${id}`).subscribe(data => {
-        this.classification = data;
+      this.http.get<IFraction>(`${this.apiUrl}/${id}`).subscribe(data => {
+        this.fraction = data;
         this.form.patchValue({
           id: data.id || null,
           index: data.index || '',
@@ -44,15 +44,15 @@ export class ClassificationFormComponent implements OnInit {
   }
 
   submit() {
-    const data: IClassification = this.form.getRawValue();
+    const data: IFraction = this.form.getRawValue();
 
-    if (this.classification?.id) {
-      this.http.put<IClassification>(this.apiUrl, data).subscribe(res => {
-        this.router.navigate(['/classification']);
+    if (this.fraction?.id) {
+      this.http.put<IFraction>(this.apiUrl, data).subscribe(res => {
+        this.router.navigate(['/fraction']);
       });
     } else {
-      this.http.post<IClassification>(this.apiUrl, data).subscribe(res => {
-        this.router.navigate(['/classification']);
+      this.http.post<IFraction>(this.apiUrl, data).subscribe(res => {
+        this.router.navigate(['/fraction']);
       });
     }
   }

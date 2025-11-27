@@ -1,0 +1,27 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">
+    {{ shipclases ? 'Edit Ship Class' : 'Add Ship Class' }}
+  </h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="mb-3">
+      <label for="id" class="form-label">Id</label>
+      <input id="id" class="form-control" formControlName="id" readonly />
+    </div>
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input id="name" class="form-control" formControlName="name" />
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-primary">
+        {{ shipclases ? 'Update' : 'Add' }}
+      </button>
+
+      <button type="button" class="btn btn-secondary" [routerLink]="['/shipclass']">
+        Back
+      </button>
+    </div>
+  </form>
+</div>

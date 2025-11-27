@@ -1,18 +1,18 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ClassificationService } from './classification.service';
-import { IClassification } from '../../entities/classification.model';
 import { RouterModule } from '@angular/router';
+import { IFraction } from '../../entities/fraction.model';
+import { FractionService } from './fraction.service';
 
 @Component({
-  selector: 'app-classification',
+  selector: 'app-fraction',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './classification.component.html'
+  templateUrl: './fraction.component.html'
 })
-export class ClassificationComponent implements OnInit {
-  classifications: IClassification[] = [];
+export class FractionComponent implements OnInit {
+  fractions: IFraction[] = [];
   currentPage = 0;
   pageSize = 10;
   totalPages = 0;
@@ -29,15 +29,15 @@ export class ClassificationComponent implements OnInit {
   };
 
   constructor(
-    private classificationService: ClassificationService,
+    private fractionService: FractionService,
     private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.loadClassifications();
+    this.loadFractions();
   }
 
-loadClassifications(): void {
+loadFractions(): void {
   this.loading = true;
 
   const params = {
@@ -48,9 +48,9 @@ loadClassifications(): void {
     name: this.filters.name || null
   };
 
-  this.classificationService.getClassifications(params).subscribe({
+  this.fractionService.getFractions(params).subscribe({
     next: (res) => {
-      this.classifications = res.content;
+      this.fractions = res.content;
       this.totalPages = res.totalPages;
       this.hasNextPage = !res.last;
       
@@ -69,13 +69,13 @@ loadClassifications(): void {
     const value = +(event.target as HTMLSelectElement).value;
     this.pageSize = value;
     this.currentPage = 0;
-    this.loadClassifications();
+    this.loadFractions();
   }
 
   changePage(page: number): void {
     if (page >= 0 && page < this.totalPages) {
       this.currentPage = page;
-      this.loadClassifications();
+      this.loadFractions();
     }
   }
 
@@ -86,12 +86,12 @@ loadClassifications(): void {
       this.sortField = field;
       this.sortDirection = 'asc';
     }
-    this.loadClassifications();
+    this.loadFractions();
   }
 
   applyFilters(): void {
     this.currentPage = 0;
-    this.loadClassifications();
+    this.loadFractions();
   }
 
   onDelete(id: number) {
@@ -99,9 +99,9 @@ loadClassifications(): void {
     return;
   }
 
-    this.classificationService.deleteClassification(id).subscribe({
+    this.fractionService.deleteFraction(id).subscribe({
       next: () => {
-        this.loadClassifications();
+        this.loadFractions();
       },
       error: err => {
         console.error("Delete error:", err);

@@ -14,6 +14,8 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -38,6 +40,13 @@ public class ShipClassQueryService extends QueryService<ShipClass> {
         log.debug("Request to get all ship list");
         Specification<ShipClass> specification = createSpecification(classCriteria);
         return shipClassMapper.toDTO(shipClassRepository.findAll(specification));
+    }
+
+    @Transactional(readOnly = true, isolation = Isolation.READ_UNCOMMITTED)
+    public Page<ShipClassDTO> getAllPage(ShipClassCriteria classCriteria, Pageable pageable){
+        log.debug("Request to get all ship list");
+        Specification<ShipClass> specification = createSpecification(classCriteria);
+        return shipClassRepository.findAll(specification, pageable).map(shipClassMapper::toDTO);
     }
 
     @Transactional(readOnly = true, isolation = Isolation.READ_UNCOMMITTED)

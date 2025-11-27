@@ -48,21 +48,21 @@ public class EventResource {
         return ResponseEntity.ok().body(response);
     }
 
-    @GetMapping("event/all")
-    ResponseEntity<List<EventDTO>> getAllPage(EventCriteria criteria, Pageable page){
+    @GetMapping("event")
+    ResponseEntity<Page<EventDTO>> getAllPage(EventCriteria criteria, Pageable page){
         log.debug("Request to get page by criteria: {}", criteria);
         Page<EventDTO> result = queryService.findAllPage(criteria, page);
-        return ResponseEntity.ok().body(result.getContent());
+        return ResponseEntity.ok().body(result);
     }
 
-    @GetMapping("event")
+    @GetMapping("event/all")
     ResponseEntity<List<EventDTO>> getAll(EventCriteria criteria){
         log.debug("Request to get page by criteria: {}", criteria);
         List<EventDTO> result = queryService.findAll(criteria);
         return ResponseEntity.ok().body(result);
     }
 
-    @DeleteMapping("event/id")
+    @DeleteMapping("event/{id}")
     ResponseEntity<Void> delete(@PathVariable("id") Long id){
         log.debug("Request to delete by id: {}", id);
         eventService.delete(id);

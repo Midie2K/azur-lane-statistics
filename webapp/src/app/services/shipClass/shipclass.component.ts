@@ -1,18 +1,18 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ClassificationService } from './classification.service';
-import { IClassification } from '../../entities/classification.model';
 import { RouterModule } from '@angular/router';
+import { IShipClass } from '../../entities/shipClass.model';
+import { ShipClassService } from './shipclass.service';
 
 @Component({
-  selector: 'app-classification',
+  selector: 'app-shipclass',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './classification.component.html'
+  templateUrl: './shipclass.component.html'
 })
-export class ClassificationComponent implements OnInit {
-  classifications: IClassification[] = [];
+export class ShipclassComponent implements OnInit {
+  shipclasses: IShipClass[] = [];
   currentPage = 0;
   pageSize = 10;
   totalPages = 0;
@@ -24,33 +24,31 @@ export class ClassificationComponent implements OnInit {
   sortDirection: 'asc' | 'desc' = 'asc';
 
   filters = {
-    index: '',
     name: ''
   };
 
   constructor(
-    private classificationService: ClassificationService,
+    private shipclassService: ShipClassService,
     private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.loadClassifications();
+    this.loadShipclass();
   }
 
-loadClassifications(): void {
+loadShipclass(): void {
   this.loading = true;
 
   const params = {
     page: this.currentPage,
     size: this.pageSize,
     sort: `${this.sortField},${this.sortDirection}`,
-    index: this.filters.index || null,
     name: this.filters.name || null
   };
 
-  this.classificationService.getClassifications(params).subscribe({
+  this.shipclassService.getshipclass(params).subscribe({
     next: (res) => {
-      this.classifications = res.content;
+      this.shipclasses = res.content;
       this.totalPages = res.totalPages;
       this.hasNextPage = !res.last;
       
@@ -69,13 +67,13 @@ loadClassifications(): void {
     const value = +(event.target as HTMLSelectElement).value;
     this.pageSize = value;
     this.currentPage = 0;
-    this.loadClassifications();
+    this.loadShipclass();
   }
 
   changePage(page: number): void {
     if (page >= 0 && page < this.totalPages) {
       this.currentPage = page;
-      this.loadClassifications();
+      this.loadShipclass();
     }
   }
 
@@ -86,12 +84,12 @@ loadClassifications(): void {
       this.sortField = field;
       this.sortDirection = 'asc';
     }
-    this.loadClassifications();
+    this.loadShipclass();
   }
 
   applyFilters(): void {
     this.currentPage = 0;
-    this.loadClassifications();
+    this.loadShipclass();
   }
 
   onDelete(id: number) {
@@ -99,9 +97,9 @@ loadClassifications(): void {
     return;
   }
 
-    this.classificationService.deleteClassification(id).subscribe({
+    this.shipclassService.deleteShipclass(id).subscribe({
       next: () => {
-        this.loadClassifications();
+        this.loadShipclass();
       },
       error: err => {
         console.error("Delete error:", err);
