@@ -1,6 +1,7 @@
 package com.midie2k.azur_lane_statistics.services.filtration.entities;
 
 import com.midie2k.azur_lane_statistics.data.entities.Classification;
+
 import com.midie2k.azur_lane_statistics.services.filtration.filters.LongFilter;
 import com.midie2k.azur_lane_statistics.services.filtration.filters.StringFilter;
 
