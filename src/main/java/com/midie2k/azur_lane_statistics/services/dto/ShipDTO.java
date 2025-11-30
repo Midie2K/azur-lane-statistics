@@ -42,12 +42,14 @@ public class ShipDTO {
     private String eventName;
 
     private Rarity rarity;
-    private String buildTime;
+    private Long buildTime;
+
+    private String avatar;
 
     public ShipDTO() {
     }
 
-    public ShipDTO(Long id, String name, Long fractionId, String fractionIndex, String fractionName, Long classificationId, String classificationIndex, String classificationName, Long shipClassId, String shipClassIndex, String shipClassName, BigDecimal hp, BigDecimal fp, BigDecimal trp, BigDecimal avi, BigDecimal aa, BigDecimal rld, BigDecimal evi, BigDecimal spd, BigDecimal acc, BigDecimal lck, BigDecimal asw, Armor armor, Long eventId, String eventName, Rarity rarity, String buildTime) {
+    public ShipDTO(Long id, String name, Long fractionId, String fractionIndex, String fractionName, Long classificationId, String classificationIndex, String classificationName, Long shipClassId, String shipClassName, BigDecimal hp, BigDecimal fp, BigDecimal trp, BigDecimal avi, BigDecimal aa, BigDecimal rld, BigDecimal evi, BigDecimal spd, BigDecimal acc, BigDecimal lck, BigDecimal asw, Armor armor, Long eventId, String eventName, Rarity rarity, Long buildTime, String avatar) {
         this.id = id;
         this.name = name;
         this.fractionId = fractionId;
@@ -74,6 +76,7 @@ public class ShipDTO {
         this.eventName = eventName;
         this.rarity = rarity;
         this.buildTime = buildTime;
+        this.avatar = avatar;
     }
 
     public Long getId() {
@@ -165,11 +168,11 @@ public class ShipDTO {
         this.armor = armor;
     }
 
-    public String getBuildTime() {
+    public Long getBuildTime() {
         return buildTime;
     }
 
-    public void setBuildTime(String buildTime) {
+    public void setBuildTime(Long buildTime) {
         this.buildTime = buildTime;
     }
 
@@ -285,16 +288,24 @@ public class ShipDTO {
         this.rarity = rarity;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         ShipDTO shipDTO = (ShipDTO) o;
-        return Objects.equals(id, shipDTO.id) && Objects.equals(name, shipDTO.name) && Objects.equals(fractionId, shipDTO.fractionId) && Objects.equals(fractionIndex, shipDTO.fractionIndex) && Objects.equals(fractionName, shipDTO.fractionName) && Objects.equals(classificationId, shipDTO.classificationId) && Objects.equals(classificationIndex, shipDTO.classificationIndex) && Objects.equals(classificationName, shipDTO.classificationName) && Objects.equals(shipClassId, shipDTO.shipClassId) && Objects.equals(shipClassName, shipDTO.shipClassName) && Objects.equals(hp, shipDTO.hp) && Objects.equals(fp, shipDTO.fp) && Objects.equals(trp, shipDTO.trp) && Objects.equals(avi, shipDTO.avi) && Objects.equals(aa, shipDTO.aa) && Objects.equals(rld, shipDTO.rld) && Objects.equals(evi, shipDTO.evi) && Objects.equals(spd, shipDTO.spd) && Objects.equals(acc, shipDTO.acc) && Objects.equals(lck, shipDTO.lck) && Objects.equals(asw, shipDTO.asw) && armor == shipDTO.armor && Objects.equals(eventId, shipDTO.eventId) && Objects.equals(eventName, shipDTO.eventName) && rarity == shipDTO.rarity && Objects.equals(buildTime, shipDTO.buildTime);
+        return Objects.equals(id, shipDTO.id) && Objects.equals(name, shipDTO.name) && Objects.equals(fractionId, shipDTO.fractionId) && Objects.equals(fractionIndex, shipDTO.fractionIndex) && Objects.equals(fractionName, shipDTO.fractionName) && Objects.equals(classificationId, shipDTO.classificationId) && Objects.equals(classificationIndex, shipDTO.classificationIndex) && Objects.equals(classificationName, shipDTO.classificationName) && Objects.equals(shipClassId, shipDTO.shipClassId) && Objects.equals(shipClassName, shipDTO.shipClassName) && Objects.equals(hp, shipDTO.hp) && Objects.equals(fp, shipDTO.fp) && Objects.equals(trp, shipDTO.trp) && Objects.equals(avi, shipDTO.avi) && Objects.equals(aa, shipDTO.aa) && Objects.equals(rld, shipDTO.rld) && Objects.equals(evi, shipDTO.evi) && Objects.equals(spd, shipDTO.spd) && Objects.equals(acc, shipDTO.acc) && Objects.equals(lck, shipDTO.lck) && Objects.equals(asw, shipDTO.asw) && armor == shipDTO.armor && Objects.equals(eventId, shipDTO.eventId) && Objects.equals(eventName, shipDTO.eventName) && rarity == shipDTO.rarity && Objects.equals(buildTime, shipDTO.buildTime) && Objects.equals(avatar, shipDTO.avatar);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, fractionId, fractionIndex, fractionName, classificationId, classificationIndex, classificationName, shipClassId, shipClassName, hp, fp, trp, avi, aa, rld, evi, spd, acc, lck, asw, armor, eventId, eventName, rarity, buildTime);
+        return Objects.hash(id, name, fractionId, fractionIndex, fractionName, classificationId, classificationIndex, classificationName, shipClassId, shipClassName, hp, fp, trp, avi, aa, rld, evi, spd, acc, lck, asw, armor, eventId, eventName, rarity, buildTime, avatar);
     }
 
     @Override
@@ -326,6 +337,7 @@ public class ShipDTO {
                 ", eventName='" + eventName + '\'' +
                 ", rarity=" + rarity +
                 ", buildTime=" + buildTime +
+                ", avatar='" + avatar + '\'' +
                 '}';
     }
 }

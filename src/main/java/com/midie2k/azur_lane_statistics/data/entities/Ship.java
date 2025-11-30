@@ -86,10 +86,14 @@ public class Ship {
     private Long event_id;
 
     @Column(name = "rarity")
+    @Enumerated(value = EnumType.STRING)
     private Rarity rarity;
 
     @Column(name = "build_time")
     private Long buildTime;
+
+    @Column(name = "avatar")
+    private String avatar;
 
     public Long getId() {
         return id;
@@ -283,16 +287,24 @@ public class Ship {
         this.rarity = rarity;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Ship ship = (Ship) o;
-        return Objects.equals(id, ship.id) && Objects.equals(name, ship.name) && Objects.equals(fraction, ship.fraction) && Objects.equals(fractionId, ship.fractionId) && Objects.equals(classification, ship.classification) && Objects.equals(classificationId, ship.classificationId) && Objects.equals(shipClass, ship.shipClass) && Objects.equals(shipClassId, ship.shipClassId) && Objects.equals(hp, ship.hp) && Objects.equals(fp, ship.fp) && Objects.equals(trp, ship.trp) && Objects.equals(avi, ship.avi) && Objects.equals(aa, ship.aa) && Objects.equals(rld, ship.rld) && Objects.equals(evi, ship.evi) && Objects.equals(spd, ship.spd) && Objects.equals(acc, ship.acc) && Objects.equals(lck, ship.lck) && Objects.equals(asw, ship.asw) && armor == ship.armor && Objects.equals(event, ship.event) && Objects.equals(event_id, ship.event_id) && rarity == ship.rarity && Objects.equals(buildTime, ship.buildTime);
+        return Objects.equals(id, ship.id) && Objects.equals(name, ship.name) && Objects.equals(fraction, ship.fraction) && Objects.equals(fractionId, ship.fractionId) && Objects.equals(classification, ship.classification) && Objects.equals(classificationId, ship.classificationId) && Objects.equals(shipClass, ship.shipClass) && Objects.equals(shipClassId, ship.shipClassId) && Objects.equals(hp, ship.hp) && Objects.equals(fp, ship.fp) && Objects.equals(trp, ship.trp) && Objects.equals(avi, ship.avi) && Objects.equals(aa, ship.aa) && Objects.equals(rld, ship.rld) && Objects.equals(evi, ship.evi) && Objects.equals(spd, ship.spd) && Objects.equals(acc, ship.acc) && Objects.equals(lck, ship.lck) && Objects.equals(asw, ship.asw) && armor == ship.armor && Objects.equals(event, ship.event) && Objects.equals(event_id, ship.event_id) && rarity == ship.rarity && Objects.equals(buildTime, ship.buildTime) && Objects.equals(avatar, ship.avatar);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, fraction, fractionId, classification, classificationId, shipClass, shipClassId, hp, fp, trp, avi, aa, rld, evi, spd, acc, lck, asw, armor, event, event_id, rarity, buildTime);
+        return Objects.hash(id, name, fraction, fractionId, classification, classificationId, shipClass, shipClassId, hp, fp, trp, avi, aa, rld, evi, spd, acc, lck, asw, armor, event, event_id, rarity, buildTime, avatar);
     }
 
     @Override
@@ -321,7 +333,8 @@ public class Ship {
                 ", event=" + event +
                 ", event_id=" + event_id +
                 ", rarity=" + rarity +
-                ", buildTime='" + buildTime + '\'' +
+                ", buildTime=" + buildTime +
+                ", avatar='" + avatar + '\'' +
                 '}';
     }
 }

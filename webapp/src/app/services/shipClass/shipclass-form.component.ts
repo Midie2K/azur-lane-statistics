@@ -46,11 +46,11 @@ export class ShipClassFormComponent implements OnInit {
 
     if (this.shipclases?.id) {
       this.http.put<IShipClass>(this.apiUrl, data).subscribe(res => {
-        this.router.navigate(['/classification']);
+        this.router.navigate(['/shipclass']);
       });
     } else {
       this.http.post<IShipClass>(this.apiUrl, data).subscribe(res => {
-        this.router.navigate(['/classification']);
+        this.router.navigate(['/shipclass']);
       });
     }
   }

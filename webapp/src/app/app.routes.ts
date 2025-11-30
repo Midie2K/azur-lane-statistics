@@ -7,9 +7,12 @@ import { EventFormComponent } from './services/event/event-from.component';
 import { ShipclassComponent } from './services/shipClass/shipclass.component';
 import { FractionComponent } from './services/fraction/fraction.component';
 import { FractionFormComponent } from './services/fraction/fraction-form.component';
+import { ShipComponent } from './services/ship/ship.component';
+import { ShipFormComponent } from './services/ship/ship-form.component';
+import { ShipDetailsComponent } from './services/ship/ship-details.component';
 
 export const routes: Routes = [
-     { path: '', redirectTo: 'classification', pathMatch: 'full' },
+     { path: '', redirectTo: 'ship', pathMatch: 'full' },
   { path: 'classification', component: ClassificationComponent },
   { path: 'classification-form', component: ClassificationFormComponent },
 
@@ -21,5 +24,9 @@ export const routes: Routes = [
 
   { path: 'fraction', component: FractionComponent },
   { path: 'fraction-form', component: FractionFormComponent },
+
+  { path: 'ship', component: ShipComponent },
+  { path: 'ship-form', component: ShipFormComponent },
+  { path: 'ship/:id', component: ShipDetailsComponent },
 
 ];

@@ -1,0 +1,5 @@
+.rarity-common { background-color: gray; }
+.rarity-rare { background-color: deepskyblue; }
+.rarity-elite { background-color: rgb(182, 11, 182); }
+.rarity-super_rare { background-color: gold; }
+.rarity-ultra_rare { background-color: red; }

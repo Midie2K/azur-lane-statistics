@@ -43,3 +43,9 @@ body {
   text-align: center;
   padding: 1rem;
 }
+
+.rarity-common { color: gray; }
+.rarity-rare { color: deepskyblue; }
+.rarity-elite { color: rgb(213, 11, 213); }
+.rarity-super_rare { color: gold; }
+.rarity-ultra_rare { color: red; }

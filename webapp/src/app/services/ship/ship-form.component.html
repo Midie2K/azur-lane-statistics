@@ -1,0 +1,136 @@
+<div class="row justify-content-center">
+  <div class="col-6">
+    <form [formGroup]="editForm" (ngSubmit)="save()">
+      <h2>Create or edit Ship</h2>
+
+      <!-- ID -->
+      <div class="form-group">
+        <label for="id">ID</label>
+        <input type="text" class="form-control" id="id" formControlName="id" readonly />
+      </div>
+
+      <!-- Name -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" formControlName="name" required />
+      </div>
+
+      <!-- Fraction -->
+      <div class="form-group">
+        <label for="fractionId">Fraction</label>
+        <div class="input-group mb-2">
+          <input type="text" class="form-control" #fractionSearch placeholder="Search..." />
+          <button type="button" class="btn btn-outline-secondary" (click)="loadFractions(fractionSearch.value)">
+            Search
+          </button>
+        </div>
+        <select class="form-control" formControlName="fractionId">
+          <option [value]="null"></option>
+          <option *ngFor="let f of fractions$ | async" [value]="f.id">{{ f.index }}</option>
+        </select>
+      </div>
+
+      <!-- Classification -->
+      <div class="form-group">
+        <label for="classificationId">Classification</label>
+        <div class="input-group mb-2">
+          <input type="text" class="form-control" #classificationSearch placeholder="Search..." />
+          <button type="button" class="btn btn-outline-secondary" (click)="loadClassifications(classificationSearch.value)">
+            Search
+          </button>
+        </div>
+        <select class="form-control" formControlName="classificationId">
+          <option [value]="null"></option>
+          <option *ngFor="let c of classifications$ | async" [value]="c.id">{{ c.index }}</option>
+        </select>
+      </div>
+
+      <!-- Ship Class -->
+      <div class="form-group">
+        <label for="shipClassId">Ship Class</label>
+        <div class="input-group mb-2">
+          <input type="text" class="form-control" #shipClassSearch placeholder="Search..." />
+          <button type="button" class="btn btn-outline-secondary" (click)="loadShipClasses(shipClassSearch.value)">
+            Search
+          </button>
+        </div>
+        <select class="form-control" formControlName="shipClassId">
+          <option [value]="null"></option>
+          <option *ngFor="let sc of shipClasses$ | async" [value]="sc.id">{{ sc.name }}</option>
+        </select>
+      </div>
+
+      <!-- Event -->
+      <div class="form-group">
+        <label for="eventId">Event</label>
+        <div class="input-group mb-2">
+          <input type="text" class="form-control" #eventSearch placeholder="Search..." />
+          <button type="button" class="btn btn-outline-secondary" (click)="loadEvents(eventSearch.value)">
+            Search
+          </button>
+        </div>
+        <select class="form-control" formControlName="eventId">
+          <option [value]="null"></option>
+          <option *ngFor="let e of events$ | async" [value]="e.id">{{ e.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+          <div class="col"><label for="avatar">Avatar link</label><input type="text" class="form-control" formControlName="avatar" /></div>
+      </div>
+      <!-- Stats -->
+      <div class="row">
+        <div class="col"><label for="hp">HP</label><input type="number" class="form-control" formControlName="hp" /></div>
+        <div class="col"><label for="fp">FP</label><input type="number" class="form-control" formControlName="fp" /></div>
+        <div class="col"><label for="trp">TRP</label><input type="number" class="form-control" formControlName="trp" /></div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col"><label for="avi">AVI</label><input type="number" class="form-control" formControlName="avi" /></div>
+        <div class="col"><label for="aa">AA</label><input type="number" class="form-control" formControlName="aa" /></div>
+        <div class="col"><label for="rld">RLD</label><input type="number" class="form-control" formControlName="rld" /></div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col"><label for="evi">EVI</label><input type="number" class="form-control" formControlName="evi" /></div>
+        <div class="col"><label for="spd">SPD</label><input type="number" class="form-control" formControlName="spd" /></div>
+        <div class="col"><label for="acc">ACC</label><input type="number" class="form-control" formControlName="acc" /></div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col"><label for="lck">LCK</label><input type="number" class="form-control" formControlName="lck" /></div>
+        <div class="col"><label for="asw">ASW</label><input type="number" class="form-control" formControlName="asw" /></div>
+        <div class="col">
+          <label for="armor">Armor</label>
+          <select class="form-control" formControlName="armor">
+            <option [value]="null"></option>
+            <option *ngFor="let a of armorOptions" [value]="a">{{ a }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col">
+          <label for="rarity">Rarity</label>
+          <select class="form-control" formControlName="rarity">
+            <option [value]="null"></option>
+            <option *ngFor="let r of rarityOptions" [value]="r">{{ r }}</option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="buildTime">Build Time (h:mm:ss)</label>
+          <input type="text" class="form-control" formControlName="buildTime" placeholder="e.g. 1:04:30" />
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-between mt-3">
+        <button type="button" class="btn btn-primary" (click)="save()">
+          {{ ship ? 'Update' : 'Add' }}
+        </button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/ship']">
+          Back
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

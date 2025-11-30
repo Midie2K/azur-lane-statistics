@@ -22,7 +22,7 @@ import java.util.List;
 @Service
 public class ShipQueryService extends QueryService<Ship> {
 
-    private final Logger log = LoggerFactory.getLogger(ShipClassQueryService.class);
+    private final Logger log = LoggerFactory.getLogger(ShipQueryService.class);
     private final ShipRepository shipRepository;
     private final ShipMapper shipMapper;
 
@@ -82,7 +82,7 @@ public class ShipQueryService extends QueryService<Ship> {
             if (criteria.getFractionName() != null) {
                 specification = specification.and((root, query, cb) -> {
                     Join<Ship, Fraction> join = root.join(Ship_.fraction, JoinType.LEFT);
-                    return cb.like(join.get(Fraction_.name),"%" + criteria.getFractionId() + "%");
+                    return cb.like(join.get(Fraction_.name),"%" + criteria.getFractionIndex() + "%");
                 });
             }
 

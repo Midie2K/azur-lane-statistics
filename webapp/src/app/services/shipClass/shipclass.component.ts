@@ -9,6 +9,7 @@ import { ShipClassService } from './shipclass.service';
   selector: 'app-shipclass',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
+  styles: ["src/styles.css"],
   templateUrl: './shipclass.component.html'
 })
 export class ShipclassComponent implements OnInit {

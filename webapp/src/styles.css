@@ -1,1 +1,7 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
+
+.rarity-common { color: gray; }
+.rarity-rare { color: deepskyblue; }
+.rarity-elite { color: rgb(213, 11, 213); }
+.rarity-super_rare { color: gold; }
+.rarity-ultra_rare { color: red; }
