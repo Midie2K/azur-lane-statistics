@@ -127,6 +127,8 @@ export class ShipComponent implements OnInit, AfterViewInit {
   formatTime(seconds?: number | string): string {
     if (seconds == null) return '';
 
+    if (seconds == 0) return 'DROP / EXCHANGE';
+
     const totalSeconds = Number(seconds);
     if (isNaN(totalSeconds)) return '';
 

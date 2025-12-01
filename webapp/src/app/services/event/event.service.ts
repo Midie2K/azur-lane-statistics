@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IShipClass } from '../../entities/shipClass.model';
 import { IEvent } from '../../entities/event.model';
 
 interface PageResponse<T> {

@@ -3,3 +3,7 @@
 .rarity-elite { background-color: rgb(182, 11, 182); }
 .rarity-super_rare { background-color: gold; }
 .rarity-ultra_rare { background-color: red; }
+
+.skilltype-offensive{background-color: rgb(246, 102, 102);}
+.skilltype-defensive{background-color: lightskyblue;}
+.skilltype-support{background-color: yellow;}

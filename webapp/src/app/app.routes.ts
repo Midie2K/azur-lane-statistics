@@ -10,6 +10,7 @@ import { FractionFormComponent } from './services/fraction/fraction-form.compone
 import { ShipComponent } from './services/ship/ship.component';
 import { ShipFormComponent } from './services/ship/ship-form.component';
 import { ShipDetailsComponent } from './services/ship/ship-details.component';
+import { SkillFormComponent } from './services/skill/skill-form.component';
 
 export const routes: Routes = [
      { path: '', redirectTo: 'ship', pathMatch: 'full' },
@@ -28,5 +29,7 @@ export const routes: Routes = [
   { path: 'ship', component: ShipComponent },
   { path: 'ship-form', component: ShipFormComponent },
   { path: 'ship/:id', component: ShipDetailsComponent },
+
+  { path: 'skill/:id', component: SkillFormComponent },
 
 ];

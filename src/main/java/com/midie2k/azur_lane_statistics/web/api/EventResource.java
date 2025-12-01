@@ -69,10 +69,4 @@ public class EventResource {
         return ResponseEntity.ok().build();
     }
 
-
-
-
-
-
-
 }
