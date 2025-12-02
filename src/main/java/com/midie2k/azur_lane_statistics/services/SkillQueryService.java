@@ -53,9 +53,9 @@ public class SkillQueryService extends QueryService<Skill>{
 
         if (criteria.getShipId() != null) {
             specification = specification.and((root, query, cb) -> {
-                Join<Skill, Ship> join = root.join(Skill_.ship, JoinType.LEFT);
-                return cb.equal(join.get(Ship_.id), criteria.getShipId());
-            });        }
+                return cb.equal(root.get(Skill_.id), criteria.getShipId());
+            });
+        }
 
         return specification;
     }

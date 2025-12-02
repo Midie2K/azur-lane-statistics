@@ -5,7 +5,7 @@ import com.midie2k.azur_lane_statistics.services.SkillQueryService;
 import com.midie2k.azur_lane_statistics.services.dto.SkillDTO;
 import com.midie2k.azur_lane_statistics.services.errors.ObjectException;
 import com.midie2k.azur_lane_statistics.services.filtration.entities.SkillCriteria;
-import com.midie2k.azur_lane_statistics.services.mapper.SkillService;
+import com.midie2k.azur_lane_statistics.services.SkillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;

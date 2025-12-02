@@ -1,11 +1,10 @@
 package com.midie2k.azur_lane_statistics.services.mapper;
 
-import com.midie2k.azur_lane_statistics.data.entities.ShipClass;
 import com.midie2k.azur_lane_statistics.data.entities.Skill;
-import com.midie2k.azur_lane_statistics.services.dto.ShipClassDTO;
 import com.midie2k.azur_lane_statistics.services.dto.SkillDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+
 
 import java.util.List;
 

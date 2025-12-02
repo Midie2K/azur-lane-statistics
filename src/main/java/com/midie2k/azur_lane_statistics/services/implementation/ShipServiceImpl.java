@@ -30,8 +30,12 @@ public class ShipServiceImpl implements ShipService {
         if(dto.getName() == null || dto.getName().isBlank()){
             throw new ObjectException("Missing ship name", ErrorList.NAME_MISSING);
         }
-        Ship ship = shipRepository.save(shipMapper.toEntity(dto));
-        return shipMapper.toDTO(ship);
+        Ship ship = shipMapper.toEntity(dto);
+        if(dto.getEventId() == null){
+            ship.setEvent(null);
+        }
+
+        return shipMapper.toDTO( shipRepository.save(ship));
     }
 
     @Override

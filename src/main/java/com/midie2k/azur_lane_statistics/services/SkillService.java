@@ -1,4 +1,4 @@
-package com.midie2k.azur_lane_statistics.services.mapper;
+package com.midie2k.azur_lane_statistics.services;
 
 import com.midie2k.azur_lane_statistics.services.dto.SkillDTO;
 

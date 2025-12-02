@@ -4,7 +4,7 @@ import com.midie2k.azur_lane_statistics.data.entities.Skill;
 import com.midie2k.azur_lane_statistics.repository.SkillRepository;
 import com.midie2k.azur_lane_statistics.services.dto.SkillDTO;
 import com.midie2k.azur_lane_statistics.services.mapper.SkillMapper;
-import com.midie2k.azur_lane_statistics.services.mapper.SkillService;
+import com.midie2k.azur_lane_statistics.services.SkillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
