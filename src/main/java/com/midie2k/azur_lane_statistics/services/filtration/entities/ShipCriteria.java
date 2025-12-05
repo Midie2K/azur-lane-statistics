@@ -11,16 +11,16 @@ public class ShipCriteria implements Criteria<Ship>{
     private LongFilter id;
     private StringFilter name;
 
-    private Long fractionId;
-    private String fractionIndex;
-    private String fractionName;
+    private LongFilter fractionId;
+    private StringFilter fractionIndex;
+    private StringFilter fractionName;
 
-    private Long classificationId;
-    private String classificationIndex;
-    private String classificationName;
+    private LongFilter classificationId;
+    private StringFilter classificationIndex;
+    private StringFilter classificationName;
 
-    private Long shipClassId;
-    private String shipClassName;
+    private LongFilter shipClassId;
+    private StringFilter shipClassName;
 
     private BigDecimalFilter hp;
     private BigDecimalFilter fp;
@@ -35,11 +35,13 @@ public class ShipCriteria implements Criteria<Ship>{
     private BigDecimalFilter asw;
     private String armor;
 
-    private Long eventId;
-    private String eventName;
+    private LongFilter eventId;
+    private StringFilter eventName;
 
     private String rarity;
     private Long buildTime;
+
+    private Boolean hasTime;
 
 
     public LongFilter getId() {
@@ -58,75 +60,75 @@ public class ShipCriteria implements Criteria<Ship>{
         this.name = name;
     }
 
-    public Long getFractionId() {
+    public LongFilter getFractionId() {
         return fractionId;
     }
 
-    public void setFractionId(Long fractionId) {
+    public void setFractionId(LongFilter fractionId) {
         this.fractionId = fractionId;
     }
 
-    public String getFractionIndex() {
+    public StringFilter getFractionIndex() {
         return fractionIndex;
     }
 
-    public void setFractionIndex(String fractionIndex) {
+    public void setFractionIndex(StringFilter fractionIndex) {
         this.fractionIndex = fractionIndex;
     }
 
-    public String getFractionName() {
+    public StringFilter getFractionName() {
         return fractionName;
     }
 
-    public void setFractionName(String fractionName) {
+    public void setFractionName(StringFilter fractionName) {
         this.fractionName = fractionName;
     }
 
-    public Long getClassificationId() {
+    public LongFilter getClassificationId() {
         return classificationId;
     }
 
-    public void setClassificationId(Long classificationId) {
+    public void setClassificationId(LongFilter classificationId) {
         this.classificationId = classificationId;
     }
 
-    public String getClassificationIndex() {
+    public StringFilter getClassificationIndex() {
         return classificationIndex;
     }
 
-    public void setClassificationIndex(String classificationIndex) {
+    public void setClassificationIndex(StringFilter classificationIndex) {
         this.classificationIndex = classificationIndex;
     }
 
-    public String getClassificationName() {
+    public StringFilter getClassificationName() {
         return classificationName;
     }
 
-    public void setClassificationName(String classificationName) {
+    public void setClassificationName(StringFilter classificationName) {
         this.classificationName = classificationName;
     }
 
-    public Long getShipClassId() {
+    public LongFilter getShipClassId() {
         return shipClassId;
     }
 
-    public void setShipClassId(Long shipClassId) {
+    public void setShipClassId(LongFilter shipClassId) {
         this.shipClassId = shipClassId;
     }
 
-    public String getShipClassName() {
+    public StringFilter getShipClassName() {
         return shipClassName;
     }
 
-    public void setShipClassName(String shipClassName) {
+    public void setShipClassName(StringFilter shipClassName) {
         this.shipClassName = shipClassName;
     }
 
-    public String getEventName() {
+    public StringFilter getEventName() {
         return eventName;
     }
 
-    public void setEventName(String eventName) {
+    public void setEventName(StringFilter eventName) {
         this.eventName = eventName;
     }
 
@@ -234,17 +236,29 @@ public class ShipCriteria implements Criteria<Ship>{
         this.armor = armor;
     }
 
-    public Long getEventId() {
+    public LongFilter getEventId() {
         return eventId;
     }
 
-    public void setEventId(Long eventId) {
+    public void setEventId(LongFilter eventId) {
         this.eventId = eventId;
     }
 
 
     public void setBuildTime(Long buildTime) {
         this.buildTime = buildTime;
+    }
+
+    public Long getBuildTime() {
+        return buildTime;
+    }
+
+    public Boolean getHasTime() {
+        return hasTime;
+    }
+
+    public void setHasTime(Boolean hasTime) {
+        this.hasTime = hasTime;
     }
 
     @Override
@@ -285,19 +299,21 @@ public class ShipCriteria implements Criteria<Ship>{
         copy.rarity = this.rarity == null ? null : this.rarity;
         copy.buildTime = this.buildTime == null ? null : this.buildTime;
 
+        copy.hasTime = this.hasTime == null ? null : this.hasTime;
+
         return copy;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        ShipCriteria that = (ShipCriteria) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(fractionId, that.fractionId) && Objects.equals(fractionIndex, that.fractionIndex) && Objects.equals(fractionName, that.fractionName) && Objects.equals(classificationId, that.classificationId) && Objects.equals(classificationIndex, that.classificationIndex) && Objects.equals(classificationName, that.classificationName) && Objects.equals(shipClassId, that.shipClassId) && Objects.equals(shipClassName, that.shipClassName) && Objects.equals(hp, that.hp) && Objects.equals(fp, that.fp) && Objects.equals(trp, that.trp) && Objects.equals(avi, that.avi) && Objects.equals(aa, that.aa) && Objects.equals(rld, that.rld) && Objects.equals(evi, that.evi) && Objects.equals(spd, that.spd) && Objects.equals(acc, that.acc) && Objects.equals(lck, that.lck) && Objects.equals(asw, that.asw) && Objects.equals(armor, that.armor) && Objects.equals(eventId, that.eventId) && Objects.equals(eventName, that.eventName) && Objects.equals(rarity, that.rarity) && Objects.equals(buildTime, that.buildTime);
+        ShipCriteria criteria = (ShipCriteria) o;
+        return Objects.equals(id, criteria.id) && Objects.equals(name, criteria.name) && Objects.equals(fractionId, criteria.fractionId) && Objects.equals(fractionIndex, criteria.fractionIndex) && Objects.equals(fractionName, criteria.fractionName) && Objects.equals(classificationId, criteria.classificationId) && Objects.equals(classificationIndex, criteria.classificationIndex) && Objects.equals(classificationName, criteria.classificationName) && Objects.equals(shipClassId, criteria.shipClassId) && Objects.equals(shipClassName, criteria.shipClassName) && Objects.equals(hp, criteria.hp) && Objects.equals(fp, criteria.fp) && Objects.equals(trp, criteria.trp) && Objects.equals(avi, criteria.avi) && Objects.equals(aa, criteria.aa) && Objects.equals(rld, criteria.rld) && Objects.equals(evi, criteria.evi) && Objects.equals(spd, criteria.spd) && Objects.equals(acc, criteria.acc) && Objects.equals(lck, criteria.lck) && Objects.equals(asw, criteria.asw) && Objects.equals(armor, criteria.armor) && Objects.equals(eventId, criteria.eventId) && Objects.equals(eventName, criteria.eventName) && Objects.equals(rarity, criteria.rarity) && Objects.equals(buildTime, criteria.buildTime) && Objects.equals(hasTime, criteria.hasTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, fractionId, fractionIndex, fractionName, classificationId, classificationIndex, classificationName, shipClassId, shipClassName, hp, fp, trp, avi, aa, rld, evi, spd, acc, lck, asw, armor, eventId, eventName, rarity, buildTime);
+        return Objects.hash(id, name, fractionId, fractionIndex, fractionName, classificationId, classificationIndex, classificationName, shipClassId, shipClassName, hp, fp, trp, avi, aa, rld, evi, spd, acc, lck, asw, armor, eventId, eventName, rarity, buildTime, hasTime);
     }
 
     @Override
@@ -324,11 +340,12 @@ public class ShipCriteria implements Criteria<Ship>{
                 ", acc=" + acc +
                 ", lck=" + lck +
                 ", asw=" + asw +
-                ", armor=" + armor +
+                ", armor='" + armor + '\'' +
                 ", eventId=" + eventId +
                 ", eventName=" + eventName +
-                ", rarity=" + rarity +
+                ", rarity='" + rarity + '\'' +
                 ", buildTime=" + buildTime +
+                ", hasTime=" + hasTime +
                 '}';
     }
 }

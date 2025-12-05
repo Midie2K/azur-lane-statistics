@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { Armor, IShip, Rarity } from '../../entities/ship.model';
 import { ShipService } from './ship.service';
 import { isPlatformBrowser } from '@angular/common';
+import { HttpParams } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-ship',
@@ -15,7 +17,6 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class ShipComponent implements OnInit, AfterViewInit {
   ships: IShip[] = [];
-  armorOptions: string[] = [];
   rarityOptions: string[] = [];
   currentPage = 0;
   pageSize = 10;
@@ -32,7 +33,8 @@ export class ShipComponent implements OnInit, AfterViewInit {
     fraction: '',
     classification: '',
     armor: null,
-    rarity: null
+    rarity: null,
+    hasTime: null
   };
 
   constructor(
@@ -43,19 +45,49 @@ export class ShipComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.loadShip();
-    this.armorOptions = Object.values(Armor);
     this.rarityOptions = Object.values(Rarity);
   }
 
   loadShip(): void {
-    this.loading = true;
+  this.loading = true;
 
-    const params = {
-      page: this.currentPage,
-      size: this.pageSize,
-      sort: `${this.sortField},${this.sortDirection}`,
-      name: this.filters.name || null
-    };
+  let params = new HttpParams()
+    .set('page', this.currentPage.toString())
+    .set('size', this.pageSize.toString())
+    .set('sort', `${this.sortField},${this.sortDirection}`);
+
+  if (this.filters.name) {
+    params = params.set('name.contains', this.filters.name);
+  }
+  if (this.filters.fraction) {
+    params = params.set('fractionName.contains', this.filters.fraction);
+  }
+  if (this.filters.classification) {
+    params = params.set('classificationName.contains', this.filters.classification);
+  }
+  if (this.filters.rarity) {
+    params = params.set('rarity.equals', this.filters.rarity);
+  }
+  if (this.filters.armor) {
+    params = params.set('armor.equals', this.filters.armor);
+  }
+  if (this.filters.hasTime !== null) {
+    params = params.set('buildTime.specified', this.filters.hasTime);
+  }
+
+  this.shipService.getship(params).subscribe({
+    next: (res) => {
+      this.ships = res.content;
+      this.totalPages = res.totalPages;
+      this.hasNextPage = !res.last;
+      this.cd.detectChanges();
+      this.loading = false;
+    },
+    error: () => {
+      this.loading = false;
+    }
+  });
+
 
     this.shipService.getship(params).subscribe({
       next: (res) => {

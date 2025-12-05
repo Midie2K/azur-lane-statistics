@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -66,56 +67,56 @@ public class ShipQueryService extends QueryService<Ship> {
             }
 
             if (criteria.getFractionId() != null) {
-                specification = specification.and((root, query, cb) -> {
-                    Join<Ship, Fraction> join = root.join(Ship_.fraction, JoinType.LEFT);
-                    return cb.equal(join.get(Fraction_.id), criteria.getFractionId());
-                });
+                specification = specification.and(
+                        buildRangeSpecification(criteria.getFractionId(),
+                                root -> root.join(Ship_.fraction).get(Fraction_.id))
+                );
             }
 
             if (criteria.getFractionIndex() != null) {
-                specification = specification.and((root, query, cb) -> {
-                    Join<Ship, Fraction> join = root.join(Ship_.fraction, JoinType.LEFT);
-                    return cb.like(join.get(Fraction_.index),"%" + criteria.getFractionId() + "%");
-                });
+                specification = specification.and(
+                        buildStringSpecification(criteria.getFractionIndex(),
+                                root -> root.join(Ship_.fraction).get(Fraction_.index))
+                );
             }
 
             if (criteria.getFractionName() != null) {
-                specification = specification.and((root, query, cb) -> {
-                    Join<Ship, Fraction> join = root.join(Ship_.fraction, JoinType.LEFT);
-                    return cb.like(join.get(Fraction_.name),"%" + criteria.getFractionIndex() + "%");
-                });
+                specification = specification.and(
+                        buildStringSpecification(criteria.getFractionName(),
+                                root -> root.join(Ship_.fraction).get(Fraction_.name))
+                );
             }
 
             if (criteria.getClassificationId() != null) {
-                specification = specification.and((root, query, cb) -> {
-                    Join<Ship, Classification> join = root.join(Ship_.classification, JoinType.LEFT);
-                    return cb.equal(join.get(Classification_.id),  criteria.getClassificationId());
-                });
+                specification = specification.and(
+                        buildRangeSpecification(criteria.getClassificationId(),
+                                root -> root.join(Ship_.classification).get(Classification_.id))
+                );
             }
             if (criteria.getClassificationIndex() != null) {
-                specification = specification.and((root, query, cb) -> {
-                    Join<Ship, Classification> join = root.join(Ship_.classification, JoinType.LEFT);
-                    return cb.like(join.get(Classification_.index), "%" + criteria.getClassificationIndex() + "%");
-                });
+                specification = specification.and(
+                        buildStringSpecification(criteria.getClassificationIndex(),
+                                root -> root.join(Ship_.classification).get(Classification_.index))
+                );
             }
             if (criteria.getClassificationName() != null) {
-                specification = specification.and((root, query, cb) -> {
-                    Join<Ship, Classification> join = root.join(Ship_.classification, JoinType.LEFT);
-                    return cb.like(join.get(Classification_.name), "%" + criteria.getClassificationName() + "%");
-                });
+                specification = specification.and(
+                        buildStringSpecification(criteria.getClassificationName(),
+                                root -> root.join(Ship_.classification).get(Classification_.name))
+                );
             }
 
             if (criteria.getShipClassId() != null) {
-                specification = specification.and((root, query, cb) -> {
-                    Join<Ship, ShipClass> join = root.join(Ship_.shipClass, JoinType.LEFT);
-                    return cb.equal(join.get(ShipClass_.id), criteria.getShipClassId());
-                });
+                specification = specification.and(
+                        buildRangeSpecification(criteria.getShipClassId(),
+                                root -> root.join(Ship_.shipClass).get(ShipClass_.id))
+                );
             }
             if (criteria.getShipClassName() != null) {
-                specification = specification.and((root, query, cb) -> {
-                    Join<Ship, ShipClass> join = root.join(Ship_.shipClass, JoinType.LEFT);
-                    return cb.like(join.get(ShipClass_.name), "%" + criteria.getShipClassName() + "%");
-                });
+                specification = specification.and(
+                        buildStringSpecification(criteria.getShipClassName(),
+                                root -> root.join(Ship_.shipClass).get(ShipClass_.name))
+                );
             }
 
             if (criteria.getHp() != null) {
@@ -153,25 +154,18 @@ public class ShipQueryService extends QueryService<Ship> {
             }
 
             if (criteria.getArmor() != null) {
-                specification = specification.and((root, query, cb) -> {
-                    try {
-                        Armor armorEnum = Armor.valueOf(criteria.getArmor());
-                        return cb.equal(root.get(Ship_.armor), armorEnum);
-                    } catch (IllegalArgumentException e) {
-                        return cb.disjunction();
-                    }
-                });
+                specification = specification.and(
+                    (root, query, cb) -> cb.equal(root.get(Ship_.armor), criteria.getArmor()));
             }
 
             if (criteria.getRarity() != null) {
-                specification = specification.and((root, query, cb) -> {
-                    try {
-                        Rarity rarityEnum = Rarity.valueOf(criteria.getRarity());
-                        return cb.equal(root.get(Ship_.rarity), rarityEnum);
-                    } catch (IllegalArgumentException e) {
-                        return cb.disjunction();
-                    }
-                });
+                specification = specification.and(
+                        (root, query, cb) -> cb.equal(root.get(Ship_.rarity), criteria.getRarity()));
+            }
+
+            if (criteria.getHasTime() != null && !criteria.getHasTime()){
+                specification = specification.and(
+                        (root, query, cb) -> cb.greaterThan(root.get(Ship_.buildTime), 0L));
             }
         }
 
