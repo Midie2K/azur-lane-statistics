@@ -116,7 +116,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let s of ships">
+        <tr *ngFor="let s of ships" >
           <td>{{ s.id }}</td>
           <td>
             <img [src]="s.avatar"
@@ -134,6 +134,7 @@
             {{ s.classificationIndex }}
         </td>
         <td
+            [ngClass]="getFractionColor(s.fractionIndex)"
             [attr.data-bs-toggle]="'tooltip'"
             [attr.data-bs-placement]="'top'"
             [attr.title]="s.fractionName">

@@ -26,7 +26,7 @@ export class ShipComponent implements OnInit, AfterViewInit {
   loading = false;
 
   sortField = 'id';
-  sortDirection: 'asc' | 'desc' = 'asc';
+  sortDirection: 'asc' | 'desc' = 'desc';
 
   filters = {
     name: '',
@@ -177,6 +177,22 @@ export class ShipComponent implements OnInit, AfterViewInit {
         case Rarity.ELITE: return 'rarity-elite';
         case Rarity.SUPER_RARE: return 'rarity-super_rare';
         case Rarity.ULTRA_RARE: return 'rarity-ultra_rare';
+        default: return '';
+        }
+    }
+
+    getFractionColor(index?: string): string {
+    switch(index) {
+        case 'IJN': return 'IJN';
+        case 'USS': return 'USS';
+        case 'HMS': return 'HMS';
+        case 'KMS': return 'KMS';
+        case 'ROCN': return 'ROCN';
+        case 'SN': return 'SN';
+        case 'FFNF': return 'FFNF';
+        case 'MNF': return 'MNF';
+        case 'RN': return 'RN';
+        case 'HNLMS': return 'HNLMS';
         default: return '';
         }
     }
