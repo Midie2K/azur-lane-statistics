@@ -130,7 +130,7 @@ export class ShipFormComponent implements OnInit {
   submit(ship: IShip) {
       const data: IShip = ship;
   
-      if (this.ship?.id) {
+      if (data.id) {
         this.http.put<IShip>(this.apiUrl, data).subscribe(res => {
           this.router.navigate(['/ship']);
         });

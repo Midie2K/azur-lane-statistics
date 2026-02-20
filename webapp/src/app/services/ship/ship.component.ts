@@ -72,7 +72,7 @@ export class ShipComponent implements OnInit, AfterViewInit {
     params = params.set('armor.equals', this.filters.armor);
   }
   if (this.filters.hasTime !== null) {
-    params = params.set('buildTime.specified', this.filters.hasTime);
+    params = params.set('hasTime', this.filters.hasTime);
   }
 
   this.shipService.getship(params).subscribe({

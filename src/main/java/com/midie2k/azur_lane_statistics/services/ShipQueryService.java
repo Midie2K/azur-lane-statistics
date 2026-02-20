@@ -163,7 +163,7 @@ public class ShipQueryService extends QueryService<Ship> {
                         (root, query, cb) -> cb.equal(root.get(Ship_.rarity), criteria.getRarity()));
             }
 
-            if (criteria.getHasTime() != null && !criteria.getHasTime()){
+            if (criteria.getHasTime() != null && criteria.getHasTime()){
                 specification = specification.and(
                         (root, query, cb) -> cb.greaterThan(root.get(Ship_.buildTime), 0L));
             }
